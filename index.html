@@ -1,65 +1,137 @@
 <html>
 <head>
-<title>Semi-supervised Prosody Modeling Using Deep Gaussian Process Latent Variable Model</title>
+<title>Sparse Approximation of Gram Matrices for GMMN-based Speech Synthesis</title>
 <!-- <style>
 </style>
  -->
 </head>
 <body>
 <center>
-<h2><font color=#0000FF>Semi-supervised Prosody Modeling Using Deep Gaussian Process Latent Variable Model</font></h2>
-
-<table border=1 align=center>
-<tr><th width=100>utterance</th><th width=100>FULL</th><th width=100>LABELED</th><th width=100>W/O ACCENT</th><th width=100>PROPOSED</th></tr>
-
-<tr align=center><td>A</td>
-    <td><audio controls="controls" ><source src="./wav/voc/F009_ATR503_J01_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/pic/F009_ATR503_J01_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dnn/F009_ATR503_J01_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dgp/F009_ATR503_J01_T01.wav" autoplay/>x</audio></td>
-</tr>
-
-<tr align=center><td>B</td>
-    <td><audio controls="controls" ><source src="./wav/voc/F009_ATR503_J26_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/pic/F009_ATR503_J26_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dnn/F009_ATR503_J26_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dgp/F009_ATR503_J26_T01.wav" autoplay/>x</audio></td>
-</tr>
-
-<tr align=center><td>C</td>
-    <td><audio controls="controls" ><source src="./wav/voc/F009_BTEC_00115_T03.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/pic/F009_BTEC_00115_T03.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dnn/F009_BTEC_00115_T03.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dgp/F009_BTEC_00115_T03.wav" autoplay/>x</audio></td>
-</tr>
-
-<tr align=center><td>D</td>
-    <td><audio controls="controls" ><source src="./wav/voc/F009_MAINICHIR_00224_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/pic/F009_MAINICHIR_00224_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dnn/F009_MAINICHIR_00224_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dgp/F009_MAINICHIR_00224_T01.wav" autoplay/>x</audio></td>
-</tr>
-
-<tr align=center><td>E</td>
-    <td><audio controls="controls" ><source src="./wav/voc/F009_NIKKEIR_00038_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/pic/F009_NIKKEIR_00038_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dnn/F009_NIKKEIR_00038_T01.wav" autoplay/>x</audio></td>
-    <td><audio controls="controls" ><source src="./wav/dgp/F009_NIKKEIR_00038_T01.wav" autoplay/>x</audio></td>
-</tr>
-
-</table>
+<h2><font color=#0000FF>Sparse Approximation of Gram Matrices for GMMN-based Speech Synthesis</font></h2>
 
 
 <br><br>
 
 <table border=1 width=600>
 <tr><th width=100>Methods</th><th>Meaning</th></tr>
-<tr align=center><td>FULL</td><td align=left style="padding-left:10px">1533 utterances were used and all the prosodic labels were fully available. This is an ideal situation.</td></tr>
-<tr align=center><td>LABELED</td><td align=left style="padding-left:10px">99 fully labeled utterances were used for training.</td></tr>
-<tr align=center><td>W/O ACCENT:</td><td align=left style="padding-left:10px">1533 utterances were used but accent information was not used as the contexts.</td></tr>
-<tr align=center><td>PROPOSED:</td><td align=left style="padding-left:10px">1533 utterances were used but only 99 fully labeled utterances were included.</td></tr>
+<tr align=center><td>MSE</td><td align=left style="padding-left:10px">DNN-based synthesis with MSE criterion (not GMMN)</td></tr>
+<tr align=center><td>VOC</td><td align=left style="padding-left:10px">Vocoded speech with repeated recordings</td></tr>
+<tr align=center><td>BLOCK-RAND</td><td align=left style="padding-left:10px">Block-diagonal matrix approximation and random minibatch selection.</td></tr>
+<tr align=center><td>BLOCK-CLST</td><td align=left style="padding-left:10px">Block-diagonal matrix approximation and clustering-based minibatch selection.</td></tr>
+<tr align=center><td>RFF-RAND</td><td align=left style="padding-left:10px">Random-Fourier-feature-based matrix approximation and random minibatch selection.</td></tr>
+<tr align=center><td>RFF-CLST</td><td align=left style="padding-left:10px">Random-Fourier-feature-based matrix approximation and clustering-based minibatch selection.</td></tr>
 </table>
 <br><br>
+
+
+<h3>Sentence 1</h3>
+<table border=1 align=center>
+<tr><th width=100>Method</th><th width=100>Sample A</th><th width=100>Sample B</th></tr>
+
+<tr align=center><td>VOC</td>
+    <td><audio controls="controls" ><source src="./wav/voc/set1_atr503_J01-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/voc/set1_atr503_J01-1.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>MSE</td>
+    <td colspan=2><audio controls="controls" ><source src="./wav/mse/set1_atr503_J01-0.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>BLOCK-RAND</td>
+    <td><audio controls="controls" ><source src="./wav/block_random/set1_atr503_J01-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/block_random/set1_atr503_J01-1.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>BLOCK-CLST</td>
+    <td><audio controls="controls" ><source src="./wav/block_clst/set1_atr503_J01-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/block_clst/set1_atr503_J01-1.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>RFF-RAND</td>
+    <td><audio controls="controls" ><source src="./wav/rff_random/set1_atr503_J01-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/rff_random/set1_atr503_J01-1.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>RFF-CLST</td>
+    <td><audio controls="controls" ><source src="./wav/rff_clst/set1_atr503_J01-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/rff_clst/set1_atr503_J01-1.wav" autoplay/>x</audio></td>
+</tr>
+
+</table>
+
+
+<h3>Sentence 2</h3>
+
+<table border=1 align=center>
+<tr><th width=100>Method</th><th width=100>Sample A</th><th width=100>Sample B</th></tr>
+
+<tr align=center><td>VOC</td>
+    <td><audio controls="controls" ><source src="./wav/voc/set1_atr503_J11-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/voc/set1_atr503_J11-4.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>MSE</td>
+    <td colspan=2><audio controls="controls" ><source src="./wav/mse/set1_atr503_J11-0.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>BLOCK-RAND</td>
+    <td><audio controls="controls" ><source src="./wav/block_random/set1_atr503_J11-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/block_random/set1_atr503_J11-4.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>BLOCK-CLST</td>
+    <td><audio controls="controls" ><source src="./wav/block_clst/set1_atr503_J11-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/block_clst/set1_atr503_J11-4.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>RFF-RAND</td>
+    <td><audio controls="controls" ><source src="./wav/rff_random/set1_atr503_J11-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/rff_random/set1_atr503_J11-4.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>RFF-CLST</td>
+    <td><audio controls="controls" ><source src="./wav/rff_clst/set1_atr503_J11-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/rff_clst/set1_atr503_J11-4.wav" autoplay/>x</audio></td>
+</tr>
+
+</table>
+
+<h3>Sentence 3</h3>
+
+<table border=1 align=center>
+<tr><th width=100>Method</th><th width=100>Sample A</th><th width=100>Sample B</th></tr>
+
+<tr align=center><td>VOC</td>
+    <td><audio controls="controls" ><source src="./wav/voc/set1_atr503_J03-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/voc/set1_atr503_J03-3.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>MSE</td>
+    <td colspan=2><audio controls="controls" ><source src="./wav/mse/set1_atr503_J03-0.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>BLOCK-RAND</td>
+    <td><audio controls="controls" ><source src="./wav/block_random/set1_atr503_J03-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/block_random/set1_atr503_J03-3.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>BLOCK-CLST</td>
+    <td><audio controls="controls" ><source src="./wav/block_clst/set1_atr503_J03-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/block_clst/set1_atr503_J03-3.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>RFF-RAND</td>
+    <td><audio controls="controls" ><source src="./wav/rff_random/set1_atr503_J03-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/rff_random/set1_atr503_J03-3.wav" autoplay/>x</audio></td>
+</tr>
+
+<tr align=center><td>RFF-CLST</td>
+    <td><audio controls="controls" ><source src="./wav/rff_clst/set1_atr503_J03-2.wav" autoplay/>x</audio></td>
+    <td><audio controls="controls" ><source src="./wav/rff_clst/set1_atr503_J03-3.wav" autoplay/>x</audio></td>
+</tr>
+
+</table>
+
 
 </center>
 </body>
